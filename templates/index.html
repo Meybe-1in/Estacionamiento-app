@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Estacionamiento</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Aplicación de Estacionamiento</h1>
+        {% if mensaje %}
+        <div class="alert alert-success" role="alert">
+            {{ mensaje }}
+        </div>
+        {% endif %}
+        
+        <form action="/" method="POST" class="mb-4">
+            <div class="form-group">
+                <label for="placa">Placa del Vehículo:</label>
+                <input type="text" name="placa" id="placa" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Ingresar Vehículo</button>
+        </form>
+        <form action="/salir_vehiculo" method="POST">
+            <div class="form-group">
+                <label for="placa_salida">Placa del Vehículo a Salir:</label>
+                <input type="text" name="placa" id="placa_salida" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-danger">Salir del Estacionamiento</button>
+        </form>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Placa</th>
+                    <th>Fecha de Entrada</th>
+                    <th>Hora de Entrada</th>
+                    <th>Numero de Parqueo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for placa, info in registros.items() %}
+                <tr>
+                    <td>{{ placa }}</td>
+                    <td>{{ info['fecha'] }}</td>
+                    <td>{{ info['hora_entrada'] }}</td>
+                    <td>{{ info['lugar'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
